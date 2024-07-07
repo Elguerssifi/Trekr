@@ -52,7 +52,7 @@ const BottomSide = () => {
           height={660}
         />
         <Image 
-          src="/Assets/iPhone_12_Pro_2_2.png"
+          src="/Assets/iPhone_12_Pro_3_3.png"
           alt="iphone"
           width={299.87}
           height={680.77}
