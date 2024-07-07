@@ -50,7 +50,7 @@ const Login = () => {
             </div>
             <div className={styles.input_container}>
               <div className={styles.input_area}>
-                <label htmlFor="email">Nom d'utilisateur ou email</label>
+                <label htmlFor="email">Nom d&apos;utilisateur ou email</label>
                 <input type="email" id="email" name="email" placeholder="Entrer votre Email" required />
               </div>
               <div className={styles.input_area}>
@@ -60,7 +60,7 @@ const Login = () => {
             </div>
             <div className={styles.side_button}>
               <button type="submit">Se connecter</button>
-              <p>Vous n'avez pas de compte ? <span onClick={navigateSignUp}>s'inscrire</span></p>
+              <p>Vous n&apos;avez pas de compte ? <span onClick={navigateSignUp}>s&apos;inscrire</span></p>
               <p><span></span> ou <span></span></p>
             </div>
             <div className={styles.google_button}>

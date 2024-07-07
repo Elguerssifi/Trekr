@@ -29,7 +29,7 @@ const SignUp = () => {
             </div>
             <div className={styles.input_container}>
               <div className={styles.input_area}>
-                <label htmlFor="nom">Nom d'utilisateur </label>
+                <label htmlFor="nom">Nom d&apos;utilisateur </label>
                 <input type="text" id="nom" name="nom" placeholder="Entrer votre Nom" required />
               </div>
               <div className={styles.input_area}>
@@ -47,10 +47,10 @@ const SignUp = () => {
             </div>
             <div className={styles.term_condition}>
               <input type="checkbox"/>
-              <p>J'accepte les conditions d'utilisation et la politique de confidentialité</p>
+              <p>J&apos;accepte les conditions d&apos;utilisation et la politique de confidentialité</p>
             </div>
             <div className={styles.side_button}>
-              <button type="submit">S'inscrire</button>
+              <button type="submit">S&apos;inscrire</button>
               <p>Vous avez déjà un compte ? <span onClick={navigateLogin}>se connecter</span></p>
             </div>
           </form>

@@ -21,7 +21,7 @@ const BottomSide = () => {
           </div>
         </div>
         <div className={styles.application_store}>
-          <p>Téléchargez l'application</p>
+          <p>Téléchargez l&apos;application</p>
           <div className={styles.images_store}>
             <Image 
               src="/Assets/google_play.png"
