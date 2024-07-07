@@ -1,0 +1,49 @@
+.container{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 200px;
+}
+.container .left_side .logo_description .description{
+  padding-left: 70px;
+  transform: translateY(-90px);
+}
+.container .left_side .logo_description .description p{
+  font-size: 24px;
+  font-weight: var(--medium-font-weight);
+  line-height: 36px;
+  color: var(--main-color);
+}
+.container .left_side .logo_description .description p span{
+  color: var(--secondary-color);
+}
+.container .left_side .application_store{
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding-left: 70px
+}
+.container .left_side .application_store p {
+  color: var(--main-color);
+  font-size: var(--small-font-size);
+  font-weight: var(--medium-font-weight);
+}
+.container .phones_side{
+  position: relative;
+  width: 50%;
+}
+.container .phones_side img:first-of-type{
+  position: absolute;
+  left: 90px;
+  z-index: 1;
+  top: 30px;
+}
+.container .phones_side img:nth-of-type(2){
+  position: absolute;
+  z-index: 2;
+  left: 255px;
+}
+.container .phones_side img:nth-of-type(3){
+  z-index: 3;
+  position: absolute;
+  right: 0;
+}
