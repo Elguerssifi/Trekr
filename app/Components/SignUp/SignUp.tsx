@@ -5,6 +5,7 @@ import styles from "./SignUp.module.css"
 import BottomSide from "../BottomSideLoginLogout/BottomSide";
 import { useRouter } from "next/navigation";
 import Axios from 'axios';
+import Head from "next/head";
 
 
 const SignUp = () => {
@@ -54,6 +55,9 @@ const SignUp = () => {
 
   return ( 
     <>
+    <Head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    </Head>
       <div className={styles.container}>
         <div className={styles.form_container}>
           <div className={styles.e_image}>

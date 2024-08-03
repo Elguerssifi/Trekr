@@ -5,6 +5,7 @@ import BottomSide from "../BottomSideLoginLogout/BottomSide";
 import { useRouter } from "next/navigation";
 import Axios from 'axios';
 import { useState } from "react";
+import Head from "next/head";
 
 
 const Login = () => {
@@ -49,6 +50,9 @@ const Login = () => {
 
   return ( 
     <>
+    <Head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    </Head>
     <div className={styles.container}>
       <div className={styles.form_container}>
         <div className={styles.e_image}>
