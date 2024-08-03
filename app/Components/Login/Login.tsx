@@ -3,11 +3,9 @@ import Image from "next/image";
 import styles from "./Login.module.css"
 import BottomSide from "../BottomSideLoginLogout/BottomSide";
 import { useRouter } from "next/navigation";
+import Axios from 'axios';
+import { useState } from "react";
 
-const dummyUsers = [
-  { email: 'user1@example.com', password: 'password1' },
-  { email: 'user2@example.com', password: 'password2' }
-];
 
 const Login = () => {
   const router = useRouter();
@@ -16,20 +14,39 @@ const Login = () => {
     router.push("/signup")
   }
 
-  const handleLogin = (event : any) => {
+  const [formData, setFormData] = useState({
+    usernameOrEmail: '',
+    password: ''
+  });
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleLogin = async (event: any) => {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+    try {
+      const response = await Axios.post('http://213.130.144.203:8084/api/auth/signin', formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
-    // Validate against dummy data
-    const isValidUser = dummyUsers.some(user => user.email === email && user.password === password);
+      const token = response.data.token; 
+      localStorage.setItem('token', token); 
 
-    if (isValidUser) {
-        router.push("/"); // Navigate to home page
-    } else {
-        alert("Email ou mot de passe incorrecte");
+      console.log('Login successful:', response.data);
+      router.push('/'); 
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Email ou mot de passe incorrecte');
     }
-};
+  };
+
   return ( 
     <>
     <div className={styles.container}>
@@ -50,12 +67,28 @@ const Login = () => {
             </div>
             <div className={styles.input_container}>
               <div className={styles.input_area}>
-                <label htmlFor="email">Nom d&apos;utilisateur ou email</label>
-                <input type="email" id="email" name="email" placeholder="Entrer votre Email" required />
+                <label htmlFor="usernameOrEmail">Nom d&apos;utilisateur ou email</label>
+                  <input 
+                    type="text" 
+                    id="usernameOrEmail" 
+                    name="usernameOrEmail" 
+                    placeholder="Entrer votre Nom d'utilisateur ou Email" 
+                    required 
+                    value={formData.usernameOrEmail}
+                    onChange={handleChange}
+                  />
               </div>
               <div className={styles.input_area}>
-                <label htmlFor="password">Mot de passe:</label>
-                <input type="password" id="password" name="password" placeholder="*******" required />
+               <label htmlFor="password">Mot de passe:</label>
+                  <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="*******" 
+                    value={formData.password} 
+                    onChange={handleChange} 
+                    required 
+                  />
               </div>
             </div>
             <div className={styles.side_button}>
