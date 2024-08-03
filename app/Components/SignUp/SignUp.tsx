@@ -56,7 +56,7 @@ const SignUp = () => {
   return ( 
     <>
     <Head>
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     </Head>
       <div className={styles.container}>
         <div className={styles.form_container}>
