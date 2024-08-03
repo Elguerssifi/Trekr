@@ -40,23 +40,12 @@ const BottomSide = () => {
       </div>
       <div className={styles.phones_side}>
         <Image 
-          src="/Assets/iPhone_12_Pro_1_1.png"
+          src="/Assets/image_phones.png"
           alt="iphone"
-          width={277.44}
-          height={629.84}
+          width={1200}
+          height={700}
         />
-        <Image 
-          src="/Assets/iPhone_12_Pro_2_2.png"
-          alt="iphone"
-          width={287}
-          height={660}
-        />
-        <Image 
-          src="/Assets/iPhone_12_Pro_3_3.png"
-          alt="iphone"
-          width={299.87}
-          height={680.77}
-        />
+        
       </div>
     </div>
    );
