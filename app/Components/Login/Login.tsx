@@ -30,7 +30,7 @@ const Login = () => {
   const handleLogin = async (event: any) => {
     event.preventDefault();
     try {
-      const response = await Axios.post('http://213.130.144.203:8084/api/auth/signin', formData, {
+      const response = await Axios.post('https://213.130.144.203:8084/api/auth/signin', formData, {
         headers: {
           'Content-Type': 'application/json'
         }
