@@ -37,7 +37,7 @@ const SignUp = () => {
       return;
     }
     try {
-      const response = await Axios.post('https://213.130.144.203:8084/api/auth/signup', formData, {
+      const response = await Axios.post('http://213.130.144.203:8084/api/auth/signup', formData, {
         headers: {
           'Content-Type': 'application/json'
         }
