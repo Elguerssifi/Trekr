@@ -4,9 +4,6 @@ import SignUp from "../Components/SignUp/SignUp";
 const signup = () => {
   return ( 
     <>
-    <Head>
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-    </Head>
       <SignUp />
     </>
    );

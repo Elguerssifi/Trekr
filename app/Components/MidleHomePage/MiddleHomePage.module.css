@@ -1,0 +1,51 @@
+.middle_section{
+  padding: 72px 0px 0px 0px;
+}
+.middle_row{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.stories_row{
+  padding: 2px 0px 0px 3px;
+  display: flex;
+  gap: 16px;
+}
+.story{
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+.story .image_profile_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 2px;
+  background: conic-gradient(
+    from 0deg,
+    #ff7a18,
+    #af002d 23%,
+    #319197 46%,
+    #fcee21 65%,
+    #b73fba 100%
+  );
+}
+.story.visited .image_profile_container{
+  background: white;
+}
+.story .image_profile_container img{
+  width: 100%;
+  border-radius: 50%;
+}
+.story .nameUtilisateur{
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--third-color);
+}

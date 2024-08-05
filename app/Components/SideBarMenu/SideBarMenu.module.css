@@ -1,0 +1,40 @@
+.navbar{
+  border-right: 2px solid #eee;
+}
+.navbar .row {
+  display: flex;
+  flex-direction: column;
+}
+.navbar .nav_link ul{
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--medium-spacing);
+}
+.navbar .nav_link ul li a{
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding: 12px;
+  font-size: var(--small-font-size);
+  font-weight: 400;
+  color: var(--main-color);
+}
+.navbar .nav_link ul li:first-of-type a{
+  color: var(--secondary-color);
+  font-weight: var(--big-font-weight);
+}
+.navbar .nav_link ul li a .image_container{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--main-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+}
+.navbar .nav_link ul li a .image_container img{
+  width: 18px;
+  height: 18px;
+}
