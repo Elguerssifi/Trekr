@@ -5,6 +5,7 @@
 .right_side .row_right_sisde{
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 /*================
  Search Start
@@ -134,6 +135,12 @@
 .map_container .first_image img{
   max-width: 96px;
   height: 65px;
+  width: 100%;
+}
+.map_container .map_image{
+  overflow: hidden;
+}
+.map_container .map_image img{
   width: 100%;
 }
 /*================
