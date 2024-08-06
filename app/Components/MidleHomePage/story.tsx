@@ -8,7 +8,11 @@ export interface StoryProps {
   visited: boolean;
 }
 
-const Story: React.FC<StoryProps> = ({ img_profile, name_utilisateur, visited: initialVisited }) => {
+const Story: React.FC<StoryProps> = ({ 
+  img_profile, 
+  name_utilisateur, 
+  visited: initialVisited 
+}) => {
   const [visited, setVisited] = useState(initialVisited);
 
   const handleClick = () => {

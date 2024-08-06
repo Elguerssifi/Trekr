@@ -13,4 +13,6 @@
   width: 83%;
   margin-left: 17%;
   padding: 0px 46px 0px 46px;
+  display: flex;
+  justify-content: space-between;
 }

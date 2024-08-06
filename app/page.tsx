@@ -1,6 +1,7 @@
 import styles from "./page.module.css"
 import SideBarMenu from "./Components/SideBarMenu/SideBarMenu";
 import MiddleHomePage from "./Components/MidleHomePage/MiddleHomePage";
+import RightSideHomePage from "./Components/RightSideHomePage/RightSideHomePage";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         </div>
         <div className={styles.home}>
           <MiddleHomePage /> 
+          <RightSideHomePage />
         </div>
       </div>
     </main>
