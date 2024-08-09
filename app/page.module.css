@@ -15,4 +15,5 @@
   padding: 0px 46px 0px 46px;
   display: flex;
   justify-content: space-between;
+  gap: 24px;
 }

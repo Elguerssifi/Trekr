@@ -28,6 +28,9 @@ input,button{
   border: none;
   outline: none;
 }
+button{
+  background: none;
+}
 a{
   text-decoration: none;
 }
@@ -37,3 +40,39 @@ ul li {
 html{
   scroll-behavior: smooth;
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 30px !important; 
+  height: 30px !important; 
+  display: flex !important; 
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 10;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after{
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  display: flex !important; 
+  justify-content: center !important;
+  align-items: center !important;
+  color: #777;
+} 
+.swiper-button-next {
+  right: 10px; /* Position to the right */
+}
+
+.swiper-button-prev {
+  left: 10px; /* Position to the left */
+}
+
+
+/* Pagination bullets */
+.swiper-pagination-bullet {
+  background-color: #fff !important; /* Bullet color */
+}
+
