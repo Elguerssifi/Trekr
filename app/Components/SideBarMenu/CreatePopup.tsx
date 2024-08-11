@@ -94,7 +94,7 @@ const CreatePopup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
           )}
           <div className={styles.input_images}>
             <button type="button" className={styles.customButton} onClick={triggerFileInput}>
-              Sélectionner depuis l'ordinateur
+              Sélectionner depuis l&apos;ordinateur
             </button>
             <input
               type="file"

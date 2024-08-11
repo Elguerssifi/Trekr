@@ -14,8 +14,9 @@ const SearchUsers = () => {
 
     if (value) {
       try {
-        const response = await axios.get(`/api/search?query=${value}`);
+        const response = await axios.get(`http://213.130.144.203:8084/api/search?query=${value}`);
         setSearchResults(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error("Error fetching search results:", error);
       }
