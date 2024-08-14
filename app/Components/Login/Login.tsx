@@ -37,11 +37,8 @@ const Login = () => {
         }
       });
 
-      const accessToken = response.data.accessToken; 
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('accessToken', accessToken); 
-      }
-
+      const token = response.data.accessToken; 
+      window.localStorage.setItem('token', token); 
       console.log('Login successful:', response.data);
       router.push('/'); 
     } catch (error) {
