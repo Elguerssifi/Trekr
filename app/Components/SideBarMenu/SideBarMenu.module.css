@@ -204,3 +204,30 @@
   color: var(--main-color);
 }
 
+@media screen and (max-width: 768px){
+  .navbar{
+    padding-top: 30px;
+  }
+  .trekr_image{
+    width: 33px;
+    height: 51px;
+    margin-bottom: 50px;
+  }
+  .navbar .row{
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar .nav_link ul li a,
+  .navbar .nav_link ul li .buttonLink{
+    font-size: 20px;
+  }
+  .navbar .nav_link ul li a .image_container{
+    width: 25px;
+    height: 25px;
+    
+  }
+  .navbar .nav_link ul li a .image_container img{
+    width: 25px;
+    height: 25px;
+  }
+}

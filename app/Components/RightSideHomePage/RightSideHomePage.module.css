@@ -201,3 +201,10 @@
   font-weight: var(--big-font-weight);
   color: #fff;
 }
+
+@media screen and (max-width: 768px){
+  .right_side{
+    width: 0%;
+    display: none;
+  }
+}

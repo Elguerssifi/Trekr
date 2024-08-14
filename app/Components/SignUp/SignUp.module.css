@@ -127,3 +127,20 @@
   height: 1024px;
   border-radius: 60px 0px 0px 60px;
 }
+
+@media screen and (max-width: 768px){
+  .container {
+    overflow: hidden;
+    justify-content: center;
+  }
+  .image-container {
+   display: none;
+  }
+  .form_container{
+    width: 100%;
+  }
+  .form_container .content_container{
+    width: 70%;
+    padding: 0;
+  }
+}

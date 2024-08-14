@@ -17,3 +17,12 @@
   justify-content: space-between;
   gap: 24px;
 }
+@media screen and (max-width: 768px){
+  .row .nav{
+    width: 10%;
+  }
+  .row .home{
+    width: 90% ;
+    margin-left: 10%;
+  }
+}

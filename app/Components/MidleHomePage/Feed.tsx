@@ -33,8 +33,8 @@ type FeedProps = {
 const Feed: React.FC<FeedProps> = ({ posts }) => {
   return (
     <div>
-      {posts.map((post) => (
-        <div key={post.id} className={styles.feed_item}>
+      {posts.map((post , index) => (
+        <div key={index} className={styles.feed_item}>
           <div className={styles.feed_header}>
             <div className={styles.user_info}>
               <div className={styles.user_info_image}>
@@ -61,9 +61,9 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
                 pagination={{ clickable: true }}
                 navigation
               >
-                {post.mediaUrls.map((media) => (
+                {post.mediaUrls.map((media , index) => (
                   media.type === 'image' && (
-                    <SwiperSlide key={media.id}>
+                    <SwiperSlide key={index}>
                       <img
                         src={media.url} 
                         alt="Post Image" 

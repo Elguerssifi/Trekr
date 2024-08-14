@@ -270,3 +270,16 @@
  border-radius: 8px;
  cursor: pointer;
 }
+
+@media screen and (max-width: 768px){
+  .middle_section{
+    width: 100%;
+  }
+  .feed_container .feed_row{
+    width: 100%;
+  }
+  .user_suggestions{
+    max-width: 472px;
+    width: 100%;
+  }
+}

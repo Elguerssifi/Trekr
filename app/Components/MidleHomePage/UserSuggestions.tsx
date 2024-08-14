@@ -30,8 +30,8 @@ const UserSuggestions: React.FC<UserSuggestionsProps> = ({ suggestions }) => {
           pagination={{ clickable: true }} // Optional pagination
           navigation
         >
-          {suggestions.map((suggestion) => (
-            <SwiperSlide key={suggestion.id}>
+          {suggestions.map((suggestion , index) => (
+            <SwiperSlide key={index}>
               <UserSuggestion
                 name={suggestion.name}
                 avatarUrl={suggestion.avatarUrl}

@@ -2,6 +2,7 @@ import React from 'react';
 import Feed from './Feed';
 import styles from './MiddleHomePage.module.css';
 import UserSuggestions from './UserSuggestions';
+import Suggestions from '../RightSideHomePage/Suggestions';
 
 const FeedPage = () => {
   const dummyData = [
@@ -81,7 +82,11 @@ const FeedPage = () => {
         <Feed key={`post-${post.id}`} posts={[post]} />
       );
       if (index === 1) {
-        postsAndSuggestions.push(<UserSuggestions suggestions={userSuggestions}/>)
+        postsAndSuggestions.push(
+        <UserSuggestions 
+          key={index}
+          suggestions={userSuggestions}
+        />)
       }
     });
 

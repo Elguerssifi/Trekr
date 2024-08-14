@@ -38,3 +38,31 @@
 .container .phones_side img{
   transform: translateX(50px);
 }
+
+@media screen and (max-width: 768px){
+  .container{
+    width: 100%;
+    justify-content: center;
+  }
+  .trekr_image{
+    width: 329px;
+    height: 312px;
+  }
+  .phones_images{
+    width: 522px;
+    height: 556.62px;
+  }
+  .container .left_side{
+    width: 55%;
+  }
+  .container .left_side .logo_description .description{
+    padding-left: 50px;
+    transform: translateY(-90px);
+  }
+  .container .phones_side{
+    width: 45%;
+  }
+  .container .phones_side img{
+    transform: translateX(0px);
+  }
+}
