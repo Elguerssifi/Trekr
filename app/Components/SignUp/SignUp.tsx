@@ -43,9 +43,6 @@ const SignUp = () => {
           'Content-Type': 'application/json'
         }
       });
-      const token = response.data.accessToken; 
-      localStorage.setItem('token', token); 
-      console.log('Sign up successful:', response.data);
       router.push('/login');
     } catch (error) {
       console.error('Error:', error);
