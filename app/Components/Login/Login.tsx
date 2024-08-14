@@ -38,7 +38,9 @@ const Login = () => {
       });
 
       const token = response.data.accessToken; 
-      window.localStorage.setItem('token', token); 
+      if (typeof window !== 'undefined'){
+        localStorage.setItem('token', token); 
+      }
       console.log('Login successful:', response.data);
       router.push('/'); 
     } catch (error) {

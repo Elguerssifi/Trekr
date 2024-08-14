@@ -5,7 +5,7 @@ import axios from 'axios';
 import styles from "./RightSideHomePage.module.css";
 
 const SearchUsers = () => {
-  const token = window.localStorage.getItem('token');
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
@@ -13,7 +13,8 @@ const SearchUsers = () => {
     const value = e.target.value;
     setSearchTerm(value);
 
-    if (value) {
+    if (value && typeof window !== 'undefined') {
+        const token = localStorage.getItem('token');
       try {
         const response = await axios.get(`http://213.130.144.203:8084/api/search?query=${value}`,{
           headers: {
