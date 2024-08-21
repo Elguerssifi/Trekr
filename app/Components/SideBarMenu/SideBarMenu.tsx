@@ -27,10 +27,6 @@ const links: LinkItem[] = [
 ];
 
 const SideBarMenu: React.FC = () => {
-  const accessToken = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
-  if(!accessToken){
-    return <></>
-  }
   const [imageSrc, setImageSrc] = useState<string>(
     "https://s3-alpha-sig.figma.com/img/e09f/7516/cb7ecdc363602a2ec1bfe9d947d12d73?Expires=1723420800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QxmurMXWxSvW9sIHxjvPR2dB32A52kboZBcdosAsHiEyArIg2hHDZTgwLmSa4hriu9WBTGRvQLmiLk7sLHB0cViFYJN86RKB8KI-Zb2j6mPO1NlPgLJKsSy4HjR4ag8YRt42QaIpePaRD3H4CW0~vGlxFaHabeLvI2MZEPdeZG~AZ7rceSBXwscKq3GNovi8rvY5CUv-t5hvXMzj7dMay6FKT~c8-iuf05JnRrfboV43qPTtYEEC3Rdfi7wnBkFuyGnl-z7pr0iQECyTiARAH~kWk5yCnYWMfe-ZlcYM4xPn5ojKbikPK77D45Ra4nKIf0nbaVTjxnIo~PSmInJckw__"
   );
@@ -39,12 +35,12 @@ const SideBarMenu: React.FC = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
-        setImageSrc("/Assets/e-image.png"); // Replace with your small image source
+        setImageSrc("/Assets/e-image.png"); 
         setShowText(false);
       } else {
         setImageSrc(
           "https://s3-alpha-sig.figma.com/img/e09f/7516/cb7ecdc363602a2ec1bfe9d947d12d73?Expires=1723420800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QxmurMXWxSvW9sIHxjvPR2dB32A52kboZBcdosAsHiEyArIg2hHDZTgwLmSa4hriu9WBTGRvQLmiLk7sLHB0cViFYJN86RKB8KI-Zb2j6mPO1NlPgLJKsSy4HjR4ag8YRt42QaIpePaRD3H4CW0~vGlxFaHabeLvI2MZEPdeZG~AZ7rceSBXwscKq3GNovi8rvY5CUv-t5hvXMzj7dMay6FKT~c8-iuf05JnRrfboV43qPTtYEEC3Rdfi7wnBkFuyGnl-z7pr0iQECyTiARAH~kWk5yCnYWMfe-ZlcYM4xPn5ojKbikPK77D45Ra4nKIf0nbaVTjxnIo~PSmInJckw__"
-        ); // Replace with your large image source
+        ); 
         setShowText(true);
       }
     };
@@ -58,6 +54,11 @@ const SideBarMenu: React.FC = () => {
     // Cleanup the event listener on component unmount
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const accessToken = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+  if (!accessToken) {
+    return <></>;
+  }
 
   return (
     <nav className={styles.navbar}>
