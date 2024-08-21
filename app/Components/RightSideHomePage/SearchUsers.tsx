@@ -14,11 +14,11 @@ const SearchUsers = () => {
     setSearchTerm(value);
 
     if (value && typeof window !== 'undefined') {
-        const token = localStorage.getItem('token');
+        const accessToken = localStorage.getItem('accessToken');
       try {
         const response = await axios.get(`http://213.130.144.203:8084/api/search?query=${value}`,{
           headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json'
           }
         });

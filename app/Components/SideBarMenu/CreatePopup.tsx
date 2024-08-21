@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { Pagination, Navigation } from 'swiper/modules';
-import styles from './SideBarMenu.module.css';
+import { useState, useRef } from "react";
+import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Pagination, Navigation } from "swiper/modules";
+import styles from "./SideBarMenu.module.css";
 
 interface PopupProps {
   isOpen: boolean;
@@ -14,26 +15,91 @@ interface PopupProps {
 }
 
 const CreatePopup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
-  const [images, setImages] = useState<File[]>([]);
-  const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
+  const [previewFiles, setPreviewFiles] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const files = Array.from(e.target.files);
-      const newImages = files.map(file => URL.createObjectURL(file));
-      setPreviewImages(prev => [...prev, ...newImages]);
-      setImages(prev => [...prev, ...files]);
+      const selectedFiles = Array.from(e.target.files);
+      const validFiles: File[] = [];
+      const previews: string[] = [];
+
+      selectedFiles.forEach((file) => {
+        const fileType = file.type;
+        const fileSizeMB = file.size / (1024 * 1024);
+
+        // Define allowed image and video types
+        const allowedImageTypes = ["image/jpeg", "image/png", "image/gif", "image/jpg"];
+        const isImage = allowedImageTypes.includes(fileType);
+        const isVideo = fileType === "video/mp4";
+
+        if ((isImage || isVideo) && fileSizeMB <= 1) {
+          validFiles.push(file);
+          previews.push(URL.createObjectURL(file));
+        } else {
+          alert(
+            "Invalid file type. Only JPG, JPEG, PNG, GIF images and MP4 videos are allowed. 1MB size limit."
+          );
+        }
+      });
+
+      setPreviewFiles((prev) => [...prev, ...previews]);
+      setFiles((prev) => [...prev, ...validFiles]);
     }
   };
 
-  const handleCancelImage = (index: number) => {
-    setPreviewImages(prev => prev.filter((_, i) => i !== index));
-    setImages(prev => prev.filter((_, i) => i !== index));
+  const handleCancelFile = (index: number) => {
+    setPreviewFiles((prev) => prev.filter((_, i) => i !== index));
+    setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handlePublish = () => {
-    console.log("Publishing images:", images);
+  const handlePublish = async () => {
+    if (files.length === 0) return;
+
+    setLoading(true);
+
+    try {
+      const accessToken =
+        typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
+
+      if (!accessToken) {
+        console.log("No access token found.");
+        return;
+      }
+
+      const formData = new FormData();
+      files.forEach((file) => {
+        formData.append("mediaFiles", file);
+      });
+      formData.append("content", "post");
+
+      const response = await axios.post(
+        "http://213.130.144.203:8084/api/posts/create",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("Uploaded files:", response.data);
+      setFiles([]);
+      setPreviewFiles([]);
+      onClose();
+    } catch (error) {
+      console.error("Error uploading files:", error);
+      if(error){
+        alert(
+          "Make sure you add only JPG, JPEG, PNG, GIF images and MP4 videos are allowed. 1MB size limit."
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const triggerFileInput = () => {
@@ -52,7 +118,7 @@ const CreatePopup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
           <h5>Créer une nouvelle publication</h5>
         </div>
         <div className={styles.popup_body}>
-          {previewImages.length > 0 ? (
+          {previewFiles.length > 0 ? (
             <div className={styles.slides_container}>
               <Swiper
                 modules={[Pagination, Navigation]}
@@ -61,21 +127,39 @@ const CreatePopup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
                 pagination={{ clickable: true }}
                 navigation
               >
-                {previewImages.map((image, index) => (
+                {previewFiles.map((file, index) => (
                   <SwiperSlide key={index}>
                     <div className={styles.imageWrapper}>
-                      <img src={image} alt={`Upload ${index}`} className={styles.previewImage} />
-                      <button className={styles.cancelButton} onClick={() => handleCancelImage(index)}>
+                      {files[index].type.includes("video") ? (
+                        <video
+                          src={file}
+                          controls
+                          className={styles.previewMedia}
+                        />
+                      ) : (
+                        <img
+                          src={file}
+                          alt={`Upload ${index}`}
+                          className={styles.previewMedia}
+                        />
+                      )}
+                      <button
+                        className={styles.cancelButton}
+                        onClick={() => handleCancelFile(index)}
+                      >
                         X
                       </button>
                     </div>
                   </SwiperSlide>
                 ))}
-                {/* Final slide with publish button */}
                 <SwiperSlide>
                   <div className={styles.publishWrapper}>
-                    <button className={styles.publishButton} onClick={handlePublish}>
-                      Publier
+                    <button
+                      className={styles.publishButton}
+                      onClick={handlePublish}
+                      disabled={loading}
+                    >
+                      {loading ? "Publication..." : "Publier"}
                     </button>
                   </div>
                 </SwiperSlide>
@@ -83,24 +167,26 @@ const CreatePopup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
             </div>
           ) : (
             <div className={styles.placeholder}>
-              <img 
-                src="https://s3-alpha-sig.figma.com/img/5139/b237/1c40fd0e14d58c324a5388109df27c76?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UBzwMpQrt-HNgBaxGoWILkhHlIj26KUVyYpyRqVVitS7RDUFmD1FQJEw5g6L0ucGoK4AGSR509rAZ79TeHa10C71dXiCzxWLzZUwcXYxCVXpdnILYlG56V2gM0snhWYDkMcYJ7VFHChzGP2cj8ESdHSIVj7DRX3QQ2HxEgfOnbZDiL6427bCoZRmZZ~j0jW6HPx82XEbsPdSlZBQjTpib6BFcVUhsY69kg-T1sZMAF5DBvcF2K~oggkftwjRQbRvmVssSJ8o0V6NfndAaPo9uf1xjY6SRn5215SY5x8Z5dc6hW8Jfir81ozUsW7XYmcdCcUsfV1dTDxFnOTrWLKWcQ__" 
-                alt="preview image" 
+              <img
+                src="https://s3-alpha-sig.figma.com/img/5139/b237/1c40fd0e14d58c324a5388109df27c76?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UBzwMpQrt-HNgBaxGoWILkhHlIj26KUVyYpyRqVVitS7RDUFmD1FQJEw5g6L0ucGoK4AGSR509rAZ79TeHa10C71dXiCzxWLzZUwcXYxCVXpdnILYlG56V2gM0snhWYDkMcYJ7VFHChzGP2cj8ESdHSIVj7DRX3QQ2HxEgfOnbZDiL6427bCoZRmZZ~j0jW6HPx82XEbsPdSlZBQjTpib6BFcVUhsY69kg-T1sZMAF5DBvcF2K~oggkftwjRQbRvmVssSJ8o0V6NfndAaPo9uf1xjY6SRn5215SY5x8Z5dc6hW8Jfir81ozUsW7XYmcdCcUsfV1dTDxFnOTrWLKWcQ__"
+                alt="preview image"
               />
-              <p>
-                Aucune image sélectionnée
-              </p>
+              <p>Aucune image ou vidéo sélectionnée</p>
             </div>
           )}
-          <div className={styles.input_images}>
-            <button type="button" className={styles.customButton} onClick={triggerFileInput}>
+          <div className={styles.input_files}>
+            <button
+              type="button"
+              className={styles.customButton}
+              onClick={triggerFileInput}
+            >
               Sélectionner depuis l&apos;ordinateur
             </button>
             <input
               type="file"
-              accept="image/*"
+              accept="image/jpeg,image/png,image/gif,image/jpg,video/mp4"
               multiple
-              onChange={handleImageChange}
+              onChange={handleFileChange}
               className={styles.fileInput}
               ref={fileInputRef}
             />

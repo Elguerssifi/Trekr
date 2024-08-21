@@ -10,10 +10,10 @@ export default function Home() {
         <div className={styles.nav}>
           <SideBarMenu />
         </div>
-        <div className={styles.home}>
+        <nav className={styles.home}>
           <MiddleHomePage /> 
           <RightSideHomePage />
-        </div>
+        </nav>
       </div>
     </main>
   );

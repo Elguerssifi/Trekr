@@ -135,7 +135,8 @@
   max-width: 470px;
   max-height: 587px !important;
 }
-.feed_item .feed_content img{
+.feed_item .feed_content img,
+.feed_item .feed_content video{
   width: 100%;
   height: 587px !important;
   object-fit: cover;

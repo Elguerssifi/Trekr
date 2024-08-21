@@ -43,6 +43,7 @@ const SignUp = () => {
           'Content-Type': 'application/json'
         }
       });
+      alert("Go To verify your email")
       router.push('/login');
     } catch (error) {
       console.error('Error:', error);

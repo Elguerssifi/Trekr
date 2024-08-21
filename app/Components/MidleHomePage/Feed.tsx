@@ -1,11 +1,13 @@
+import React, { useState } from 'react';
+import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/navigation'; // Import navigation styles
-import 'swiper/css/pagination'; // Import pagination styles
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { Pagination, Navigation } from 'swiper/modules';
-import styles from "./MiddleHomePage.module.css" 
+import styles from "./MiddleHomePage.module.css";
 import { MdVerified } from "react-icons/md";
-import { FaHeart  , FaCommentDots} from "react-icons/fa";
+import { FaHeart, FaCommentDots, FaUser } from "react-icons/fa";
 import { SiSubstack } from "react-icons/si";
 import { BsSendFill } from "react-icons/bs";
 
@@ -22,8 +24,10 @@ type Post = {
   mediaUrls: Media[];
   user: {
     username: string;
-    avatarUrl: string;
+    profileImageUrl?: string;
   };
+  likeCount: number;
+  commentCount: number;
 };
 
 type FeedProps = {
@@ -31,22 +35,53 @@ type FeedProps = {
 };
 
 const Feed: React.FC<FeedProps> = ({ posts }) => {
+  const [postLikes, setPostLikes] = useState<{ [key: number]: number }>({});
+
+  const handleLikeClick = async (postId: number) => {
+    const accessToken = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+    console.log(postId)
+    if (accessToken) {
+      try {
+        await axios.post(
+          'http://213.130.144.203:8084/api/reactions/post',
+          { postId, type: 'LIKE' },
+          {
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        setPostLikes(prev => ({
+          ...prev,
+          [postId]: (prev[postId] || posts.find(post => post.id === postId)?.likeCount || 0) + 1,
+        }));
+      } catch (error) {
+        console.error('Error liking post:', error);
+      }
+    }
+  };
+
   return (
     <div>
-      {posts.map((post , index) => (
-        <div key={index} className={styles.feed_item}>
+      {posts.map((post) => (
+        <div key={post.id} className={styles.feed_item}>
           <div className={styles.feed_header}>
             <div className={styles.user_info}>
               <div className={styles.user_info_image}>
-                <img
-                  src={post.user.avatarUrl} 
-                  alt="User Avatar" 
-                />
+                {post.user.profileImageUrl ? (
+                  <img src={post.user.profileImageUrl} alt="User Avatar" />
+                ) : (
+                  <FaUser className={styles.default_avatar} />
+                )}
               </div>
               <div className={styles.username_area}>
                 <span className={styles.username}>{post.user.username}</span>
-                < MdVerified className={styles.verified_icon} />
-                <span className={styles.created_at}>{new Date(post.createdAt).toLocaleTimeString([], { hour: '2-digit', hour12: false })}</span>
+                <MdVerified className={styles.verified_icon} />
+                <span className={styles.created_at}>
+                  {new Date(post.createdAt).toLocaleDateString()} {new Date(post.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </span>
               </div>
             </div>
             <button className={styles.more_options}>•••</button>
@@ -61,15 +96,22 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
                 pagination={{ clickable: true }}
                 navigation
               >
-                {post.mediaUrls.map((media , index) => (
-                  media.type === 'image' && (
-                    <SwiperSlide key={index}>
+                {post.mediaUrls.map((media, index) => (
+                  <SwiperSlide key={index}>
+                    {media.type === 'image' ? (
                       <img
-                        src={media.url} 
-                        alt="Post Image" 
+                        src={`http://213.130.144.203:8084/files/${media.url}`}
+                        alt={`Post Image ${index}`}
+                        className={styles.mediaItem}
                       />
-                    </SwiperSlide>
-                  )
+                    ) : media.type === 'video' ? (
+                      <video
+                        src={`http://213.130.144.203:8084/files/${media.url}`}
+                        controls
+                        className={styles.mediaItem}
+                      />
+                    ) : null}
+                  </SwiperSlide>
                 ))}
               </Swiper>
             )}
@@ -79,26 +121,26 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
             <div className={styles.actions}>
               <div className={styles.area_comment_like}>
                 <div className={styles.display_actions}>
-                  <span>10</span>
+                  <span>{postLikes[post.id] || post.likeCount}</span>
+                  <button className={styles.like_button} onClick={() => handleLikeClick(post.id)}>
+                    <FaHeart />
+                  </button>
+                </div>
+                <div className={styles.display_actions}>
+                  <span>{post.commentCount}</span>
                   <button className={styles.comment_button}>
                     <FaCommentDots />
                   </button>
                 </div>
-                <div className={styles.display_actions}>
-                  <span>10</span>
-                  <button className={styles.like_button}>
-                    <FaHeart />
-                  </button>
-                </div>
               </div>
-            <div className={styles.area_share_save}>
-              <button className={styles.share_button}>
-                <BsSendFill />
-              </button>
-              <button className={styles.save_button}>
-                <SiSubstack />
-              </button>
-            </div>
+              <div className={styles.area_share_save}>
+                <button className={styles.share_button}>
+                  <BsSendFill />
+                </button>
+                <button className={styles.save_button}>
+                  <SiSubstack />
+                </button>
+              </div>
             </div>
           </div>
         </div>

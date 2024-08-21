@@ -1,10 +1,11 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Feed from './Feed';
 import styles from './MiddleHomePage.module.css';
 import UserSuggestions from './UserSuggestions';
-import Suggestions from '../RightSideHomePage/Suggestions';
 
 const FeedPage = () => {
+
   const dummyData = [
     {
       id: 1,
@@ -74,24 +75,60 @@ const FeedPage = () => {
     },
   ];
 
+  const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const accessToken = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+
+      if (accessToken) {
+        try {
+          const response = await axios.get('http://213.130.144.203:8084/api/posts/feed', {
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          });
+          if (Array.isArray(response.data.content)) {
+            setPosts(response.data.content);
+          }
+        } catch (error) {
+          console.error('Error fetching feed:', error);
+        } finally {
+          setLoading(false)
+        }
+       }
+    };
+
+    fetchPosts();
+  }, []);
+
   const renderFeedWithSuggestions = () => {
     const postsAndSuggestions: JSX.Element[] = [];
-
-    dummyData.forEach((post, index) => {
-      postsAndSuggestions.push(
-        <Feed key={`post-${post.id}`} posts={[post]} />
-      );
-      if (index === 1) {
+    if (Array.isArray(posts)){
+      posts.forEach((post, index) => {
         postsAndSuggestions.push(
-        <UserSuggestions 
-          key={index}
-          suggestions={userSuggestions}
-        />)
-      }
-    });
+          <Feed key={`post-${post.id}`} posts={[post]} />
+        );
+  
+        if (index === 1) {
+          postsAndSuggestions.push(
+            <UserSuggestions
+              key="user-suggestions"
+              suggestions={userSuggestions}
+            />
+          );
+        }
+      });
+    }
 
     return postsAndSuggestions;
   };
+
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading state while fetching data
+  }
 
   return (
     <div className={styles.feed_container}>
