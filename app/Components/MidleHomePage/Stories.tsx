@@ -1,7 +1,7 @@
 "use client";
 import styles from './MiddleHomePage.module.css';
 import Story, { StoryProps } from './story';
-
+import Head from 'next/head';
 
 const Stories: React.FC = () => {
   // Simulated API data
@@ -39,6 +39,10 @@ const Stories: React.FC = () => {
   ];
 
   return (
+    <>
+    <Head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    </Head>
     <div className={styles.stories_container}>
       <div className={styles.stories_row}>
         {simulatedData.map((user, index) => (
@@ -51,6 +55,7 @@ const Stories: React.FC = () => {
         ))}
       </div>
     </div>
+    </>
   );
 }
 

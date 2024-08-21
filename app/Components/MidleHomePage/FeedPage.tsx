@@ -3,7 +3,7 @@ import axios from 'axios';
 import Feed from './Feed';
 import styles from './MiddleHomePage.module.css';
 import UserSuggestions from './UserSuggestions';
-
+import Head from 'next/head';
 const FeedPage = () => {
 
   const dummyData = [
@@ -131,11 +131,16 @@ const FeedPage = () => {
   }
 
   return (
+    <>
+    <Head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    </Head>
     <div className={styles.feed_container}>
       <div className={styles.feed_row}>
         {renderFeedWithSuggestions()}
       </div>
     </div>
+    </>
   );
 };
 

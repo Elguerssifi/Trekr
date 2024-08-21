@@ -10,6 +10,7 @@ import { MdVerified } from "react-icons/md";
 import { FaHeart, FaCommentDots, FaUser } from "react-icons/fa";
 import { SiSubstack } from "react-icons/si";
 import { BsSendFill } from "react-icons/bs";
+import Head from 'next/head';
 
 type Media = {
   id: number;
@@ -64,6 +65,10 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
   };
 
   return (
+    <>
+    <Head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    </Head>
     <div>
       {posts.map((post) => (
         <div key={post.id} className={styles.feed_item}>
@@ -146,6 +151,7 @@ const Feed: React.FC<FeedProps> = ({ posts }) => {
         </div>
       ))}
     </div>
+    </>
   );
 };
 

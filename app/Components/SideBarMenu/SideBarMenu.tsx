@@ -6,7 +6,7 @@ import styles from "./SideBarMenu.module.css";
 import { IconType } from "react-icons";
 import Link from "next/link";
 import { FaHome, FaCompass, FaEnvelope, FaBell, FaPlus, FaUsers, FaMap, FaUser } from "react-icons/fa";
-
+import Head from "next/head";
 type LinkItem = {
   title: string;
   icon: IconType;
@@ -61,6 +61,10 @@ const SideBarMenu: React.FC = () => {
   }
 
   return (
+    <>
+    <Head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    </Head>
     <nav className={styles.navbar}>
       <div className={styles.row}>
         <div className={styles.logo}>
@@ -99,6 +103,7 @@ const SideBarMenu: React.FC = () => {
         </div>
       </div>
     </nav>
+    </>
   );
 };
 

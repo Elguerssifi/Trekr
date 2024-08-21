@@ -1,5 +1,5 @@
 import styles from "./MiddleHomePage.module.css"
-
+import Head from "next/head";
 type UserSuggestionProps = {
   name: string;
   avatarUrl: string;
@@ -12,6 +12,10 @@ const UserSuggestion: React.FC<UserSuggestionProps> = ({
   description
 }) => {
   return (
+    <>
+    <Head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    </Head>
     <div className={styles.user_suggestion}>
       <div className={styles.user_image_avatar}>
         <img 
@@ -29,6 +33,7 @@ const UserSuggestion: React.FC<UserSuggestionProps> = ({
           </button>
       </div>
     </div>
+    </>
   );
 };
 

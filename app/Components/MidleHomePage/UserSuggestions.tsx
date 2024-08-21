@@ -3,7 +3,8 @@ import UserSuggestion from "./UserSuggestion";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/navigation'; // Import navigation styles
+import 'swiper/css/navigation'; 
+import Head from "next/head";
 
 interface Suggestion {
   id: number;
@@ -18,6 +19,10 @@ interface UserSuggestionsProps {
 
 const UserSuggestions: React.FC<UserSuggestionsProps> = ({ suggestions }) => {
   return (
+    <>
+    <Head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    </Head>
     <div className={styles.user_suggestions}>
       <div className={styles.title}>
         <p>Des suggestions pour vous</p>
@@ -42,6 +47,7 @@ const UserSuggestions: React.FC<UserSuggestionsProps> = ({ suggestions }) => {
         </Swiper>
       </div>
     </div>
+    </>
   );
 };
 

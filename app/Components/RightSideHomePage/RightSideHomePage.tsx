@@ -4,6 +4,7 @@ import SearchUsers from "./SearchUsers";
 import Suggestions from "./Suggestions";
 import Map from "./Map";
 import BottomDescription from "./BottomDescription";
+import Head from "next/head";
 
 const RightSideHomePage = () => {
   const accessToken = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
@@ -11,6 +12,10 @@ const RightSideHomePage = () => {
     return <></>
   }
   return ( 
+    <>
+    <Head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    </Head>
     <section className={styles.right_side}>
       <div className={styles.row_right_side}>
         <SearchUsers />
@@ -19,6 +24,7 @@ const RightSideHomePage = () => {
         <BottomDescription />
       </div>
     </section>
+    </>
    );
 }
  

@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Pagination, Navigation } from "swiper/modules";
 import styles from "./SideBarMenu.module.css";
+import Head from "next/head";
 
 interface PopupProps {
   isOpen: boolean;
@@ -109,6 +110,10 @@ const CreatePopup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
+    <>
+    <Head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    </Head>
     <div className={styles.popupOverlay} onClick={onClose}>
       <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
         <div className={styles.popup_header}>
@@ -194,6 +199,7 @@ const CreatePopup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
