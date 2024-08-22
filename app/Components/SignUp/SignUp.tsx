@@ -140,7 +140,7 @@ const SignUp = () => {
         </div>
         <div className={styles['image-container']}>
           <Image 
-            src="https://s3-alpha-sig.figma.com/img/0bd0/baa3/4df486b636462479ad539b92d712b986?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Pp5K21t6LXyBMavDpFjvsNbRVkLZ-q44M2Dm~xMH0JW7i0i6TwdV668bAmogVMyNj1HO7BJR28CIYP03xZfqRP240Q7ETtUINr9RqBkuh7HIPU4eToP818ojDhTbqs0zIvlxIaeiYs9Oqt0yLaNlqcHCSTeKiw1X6LUjfX90P~qs7HGAWP6MUMLF5pc6IDpyzyc41lkgj1LKZ2xJ7VBu83LRWrVDCvsQ6S6ah6I3YGJ40mRpc~4873ZxzNYQli9sjmIp90Y6yJEwMUxmgauinOzIWful407BeOoQrNyivqNQIW8PMfA6~tEqiXqQKGvFgFPNhbU9xeoFxqmyBslOTw__"
+            src="/Assets/signup-page-image.gif"
             alt="Voyage tkeker" 
             width={720}
             height={1024}
