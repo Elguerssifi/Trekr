@@ -7,15 +7,8 @@ import BottomDescription from "./BottomDescription";
 import Head from "next/head";
 
 const RightSideHomePage = () => {
-  const accessToken = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
-  if(!accessToken){
-    return <></>
-  }
   return ( 
     <>
-    <Head>
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-    </Head>
     <section className={styles.right_side}>
       <div className={styles.row_right_side}>
         <SearchUsers />

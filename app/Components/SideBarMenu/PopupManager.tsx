@@ -20,10 +20,8 @@ const PopupManager: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Disable scrolling when popup is open
     document.body.style.overflow = isPopupOpen ? 'hidden' : 'auto';
     
-    // Cleanup: re-enable scrolling when the component unmounts or popup closes
     return () => {
       document.body.style.overflow = 'auto';
     };

@@ -169,6 +169,7 @@
   font-size: 40px;
   font-weight: 400;
   color: var(--main-color);
+  text-align: center;
 }
 .bottom_container .description h4 span{
   color: var(--secondary-color);

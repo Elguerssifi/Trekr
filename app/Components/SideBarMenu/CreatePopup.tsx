@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useRef } from "react";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,7 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Pagination, Navigation } from "swiper/modules";
 import styles from "./SideBarMenu.module.css";
-import Head from "next/head";
+import baseURL from "@/app/utils/baseUrl";
 
 interface PopupProps {
   isOpen: boolean;
@@ -77,7 +76,7 @@ const CreatePopup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
       formData.append("content", "post");
 
       const response = await axios.post(
-        "http://213.130.144.203:8084/api/posts/create",
+        `${baseURL}/api/posts/create`,
         formData,
         {
           headers: {
@@ -111,9 +110,6 @@ const CreatePopup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 
   return (
     <>
-    <Head>
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-    </Head>
     <div className={styles.popupOverlay} onClick={onClose}>
       <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
         <div className={styles.popup_header}>
@@ -173,7 +169,7 @@ const CreatePopup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
           ) : (
             <div className={styles.placeholder}>
               <img
-                src="https://s3-alpha-sig.figma.com/img/5139/b237/1c40fd0e14d58c324a5388109df27c76?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UBzwMpQrt-HNgBaxGoWILkhHlIj26KUVyYpyRqVVitS7RDUFmD1FQJEw5g6L0ucGoK4AGSR509rAZ79TeHa10C71dXiCzxWLzZUwcXYxCVXpdnILYlG56V2gM0snhWYDkMcYJ7VFHChzGP2cj8ESdHSIVj7DRX3QQ2HxEgfOnbZDiL6427bCoZRmZZ~j0jW6HPx82XEbsPdSlZBQjTpib6BFcVUhsY69kg-T1sZMAF5DBvcF2K~oggkftwjRQbRvmVssSJ8o0V6NfndAaPo9uf1xjY6SRn5215SY5x8Z5dc6hW8Jfir81ozUsW7XYmcdCcUsfV1dTDxFnOTrWLKWcQ__"
+                src="/Assets/fake_image.png"
                 alt="preview image"
               />
               <p>Aucune image ou vidéo sélectionnée</p>

@@ -30,9 +30,9 @@ const UserSuggestions: React.FC<UserSuggestionsProps> = ({ suggestions }) => {
       <div className={styles.list_user_suggestions}>
         <Swiper
           modules={[Navigation]}
-          slidesPerView={2.5} // Show 2 full slides and half of the third
-          spaceBetween={4} // Adjust space between slides if needed
-          pagination={{ clickable: true }} // Optional pagination
+          slidesPerView={2.5} 
+          spaceBetween={4} 
+          pagination={{ clickable: true }}
           navigation
         >
           {suggestions.map((suggestion , index) => (

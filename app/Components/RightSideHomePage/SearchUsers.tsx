@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import axios from 'axios';
 import styles from "./RightSideHomePage.module.css";
+import baseURL from "../../utils/baseUrl"
 
 const SearchUsers = () => {
   
@@ -16,7 +17,7 @@ const SearchUsers = () => {
     if (value && typeof window !== 'undefined') {
         const accessToken = localStorage.getItem('accessToken');
       try {
-        const response = await axios.get(`http://213.130.144.203:8084/api/search?query=${value}`,{
+        const response = await axios.get(`${baseURL}/api/search?query=${value}`,{
           headers: {
             'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json'
@@ -36,7 +37,7 @@ const SearchUsers = () => {
     <div className={styles.search_container}>
       <div className={styles.image_fly}>
         <img 
-          src="https://s3-alpha-sig.figma.com/img/a62b/8a37/6efe50c39c66fe3e7fb01ab0f48154d5?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oc8v32zjXdZJj9YiEMRM6U7QniRR-4Q~m6xdp72D4yjrIyKkkwctP7tKnp4EnbDxePp-NVTAr1PPJIH4vtU4suC3Aol75C2sMi63TEd19hkn4CqYZSwFnXoKLYlAQzkLQq37Fd5aQHBtnt0bZQ4FvAIzVSd8Jlw8slTJ8iIkU1yrjIVRoiP~BJos8ZF8Ld1m4qHPL8YiUvgai8OXuben027c-KGGbZapsywTebKhP-A0IhCEfQQwyyFlPRfzWT3Hq-MVfWwnQQXe0NTYw7cbz9iRgEn9OIQVn1rp9Q1RxyswTOIOYMs70JKIS~PeXO9-9T6ESb7fJPnFrV1o0uQcGw__"
+          src="/Assets/plane_image_treker.png"
           alt="fly image trekr"
         />
       </div>

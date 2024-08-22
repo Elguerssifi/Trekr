@@ -3,7 +3,8 @@ import axios from 'axios';
 import Feed from './Feed';
 import styles from './MiddleHomePage.module.css';
 import UserSuggestions from './UserSuggestions';
-import Head from 'next/head';
+import baseURL from "../../utils/baseUrl"
+
 const FeedPage = () => {
 
   const dummyData = [
@@ -52,25 +53,25 @@ const FeedPage = () => {
     {
       id: 1,
       name: 'Kriti Chadha',
-      avatarUrl: 'https://s3-alpha-sig.figma.com/img/f1b5/c2ab/85fb415ef4f507a1bd1747f7c90a4447?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=anJRroReIIqnPiBkyxkB7JA7G3zgdx4vptVAMqf83bKNUpeH0S0tKQqu-uwZYAenorHyCgGukzNW2CIrlYXU0x6Lvl5wGuoYftS1pnivfDiz9hHj6EuR6tZR-HPayDpnWTzyh-PkV4OwLoeiKofA1k1hmWUpXN8ndMMVrbTc~B6SquzW3n26FRxdeFeU0sd0GVEI5k7SlceuoDVIHFEKUDNeWR4hfWYAByKWBq~Yje8Bzwj-ZJHwKI2PR-n5X5UGVsjD2Mcff6ygUMpzb3BrLtJ27oCZXoc-V9w7GIhDeWudZe0yeYO2As6Wyt7Bxc6sPTZvN3n8Y2waYVSm4tXhqw__',
+      avatarUrl: '/Assets/defavours.jfif',
       description : "vous suit"
     },
     {
       id: 2,
       name: 'Durgesh Nandini',
-      avatarUrl: 'https://s3-alpha-sig.figma.com/img/02dc/b37b/e364369c1425aa22414540a765f104d7?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=n2XYg8hshbSbhWOzIl1I6MbctzrAWiahGBN~vsaCiffAOhSK5B~1ZwqtXKxnPP97HmjId90WIlHfN-7B6K0Z40HxRcq3SZrxsKUvnDEWP18omwEau-XAPXa5Y5p4XKI~8URszw-d4CmfIrGy-MaLDD30FE1gCsZ8GAUhVBclwvtuSlzoFmXrnxyhXfaH73SJIY2EMl20203WzruUl1RnewUzcAey-eGQ8fmmOYwCPqPajIFEHy9mpTAhLN21kMgEaigOl0qdQQIzVRMpU6Upez6I4Itev74GpNuDpEnNmbTk9vUKHHj5JniI0uP5l7EPGVdsQjU9rXCbfRXIAPkfkw__',
+      avatarUrl: '/Assets/mkbhd.jfif',
       description : "vous suit"
     },
     {
       id: 3,
       name: 'Maria Gomez',
-      avatarUrl: 'https://s3-alpha-sig.figma.com/img/4961/b825/03746d58b13bf1eaa3f12121fcfe4c60?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eniTCLgfj95R~KzUpSUL-aasAgh813hehmppkgsNGDSzux8aB4Gp82SVN8d44WRrTfFbLX9FHJ5r0fXsxxqxb4WU-61drwIOl6pyU91Vb52ctb4hBhO7j~irexQ9rx1lUAjJZKWAQxBJopILlnuDgefCg5Md-QVl0DbaNiQOz2T-rEovxANFiHOdU1U-bh9E6XgdVSFGm3QgW7AsTgb4loCG9ixL3o3Q3TA06JVdkvLyLzuaCXTcx0DnQjAGhC2-FdkWXr5XMfeS3lBDECqHds5zg3rgTvCXTwORlQaAmtYNfLwL0HYY5~4MzZd6u3h0ctQgkODgzkIvk8fQxeltGA__',
+      avatarUrl: '/Assets/openaidalle.jfif',
       description : "vous suit"
     },
     {
       id: 4,
       name: 'Maria Gomez',
-      avatarUrl: 'https://s3-alpha-sig.figma.com/img/1abc/33ed/260797fb26280ba4939cb0d7e5835f5c?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PuekCKC-q0VU78KOyCcMhfnCvQqA-TmRPhHwcugq-VZyEndkaVu1qnyrmdGdiUsMWKYJEoo9mbCWfHrHPztAullGX57GGEuXl~whraKNlQcKwq55AssYZMHTNZx9JMH6cyDHfS1KtltQN3CB-vj~fgC4Pae6zSjS4Xk6S-oj7tobExhEFETDvj7MUCoGfBXzxR~SnhKtv3Kn2Zv~6cg1xjYMvXMi8xIy~xy4C6nbEH9t0I68vIDRa9jOzkATF8EbMmBvujqT4F2Bk5vWFznVAHkP4fJwHKOpn9F5JXjvQEqXNwyxVUbK8YY53qYypEjjXPswPPdob6ybEJMLjFriNg__',
+      avatarUrl: '/Assets/wahab.xyz.jfif',
       description : "vous suit"
     },
   ];
@@ -84,7 +85,7 @@ const FeedPage = () => {
 
       if (accessToken) {
         try {
-          const response = await axios.get('http://213.130.144.203:8084/api/posts/feed', {
+          const response = await axios.get(`${baseURL}/api/posts/feed`, {
             headers: {
               'Authorization': `Bearer ${accessToken}`,
               'Content-Type': 'application/json',
@@ -132,9 +133,6 @@ const FeedPage = () => {
 
   return (
     <>
-    <Head>
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-    </Head>
     <div className={styles.feed_container}>
       <div className={styles.feed_row}>
         {renderFeedWithSuggestions()}

@@ -5,8 +5,7 @@ import BottomSide from "../BottomSideLoginLogout/BottomSide";
 import { useRouter } from "next/navigation";
 import Axios from 'axios';
 import { useState } from "react";
-import Head from "next/head";
-
+import baseURL from "../../utils/baseUrl"
 
 const Login = () => {
   const router = useRouter();
@@ -31,7 +30,7 @@ const Login = () => {
   const handleLogin = async (event: any) => {
     event.preventDefault();
     try {
-      const response = await Axios.post('http://213.130.144.203:8084/api/auth/signin', formData, {
+      const response = await Axios.post(`${baseURL}/api/auth/signin`, formData, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -51,9 +50,6 @@ const Login = () => {
 
   return ( 
     <>
-    <Head>
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-    </Head>
     <div className={styles.container}>
       <div className={styles.form_container}>
         <div className={styles.e_image}>
@@ -117,7 +113,7 @@ const Login = () => {
       </div>
       <div className={styles['image-container']}>
         <Image 
-          src="https://s3-alpha-sig.figma.com/img/7aea/8ab1/34bebb570b0398ecef6d1ff3cb9df3dc?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=g0MmWdCfXPzsn3tV~N05Zw7w6M1uVh4XUuByf~r9RiIDGfJnqvllzky7E78JqFf5jWHcWZHwMGnqVmAZ547siOLy-zhZMBL~FWv958UsIev9ryopvtfjsLWWP9~UjX1Pq7Efa-aF21U5mnf92fbR5zz7mDtPycJMX2vJAgC1q3d0FRbOHRnjPZNWbwQS7NTQml4LO75GN2fDuhNOLF6~PDTspeheNJFcwwZpnOUOovIq3hAOnFoUshw1yJZ3llz9pIiPl8GRjYXkqo2-YV0r1T1kqJT7G0zEBcUke3WJSLgIG3ZMbI4ktlDYub5ZCxLvPWZkI4fB~bbu6q0P0occMw__"
+          src="/Assets/login-page-image.gif"
           alt="Voyage tkeker" 
           width={720}
           height={1024}
