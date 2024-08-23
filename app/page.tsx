@@ -6,6 +6,7 @@ import MiddleHomePage from "./Components/MidleHomePage/MiddleHomePage";
 import RightSideHomePage from "./Components/RightSideHomePage/RightSideHomePage";
 import styles from "./page.module.css";
 import Head from "next/head";
+import LoadingDots from "./Components/LoadingDots/LoadingDots"
 
 export default function Home() {
   const router = useRouter();
@@ -21,7 +22,7 @@ export default function Home() {
   }, [router]);
 
   if (isLoading) {
-    return <div>Loading...</div>; 
+    return <LoadingDots />
   }
 
   return (

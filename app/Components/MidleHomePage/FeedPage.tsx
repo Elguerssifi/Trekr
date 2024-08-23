@@ -4,6 +4,7 @@ import Feed from './Feed';
 import styles from './MiddleHomePage.module.css';
 import UserSuggestions from './UserSuggestions';
 import baseURL from "../../utils/baseUrl"
+import LoadingDots from '../LoadingDots/LoadingDots';
 
 const FeedPage = () => {
 
@@ -128,7 +129,7 @@ const FeedPage = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Show a loading state while fetching data
+    return <LoadingDots />
   }
 
   return (
